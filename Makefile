@@ -14,6 +14,10 @@ ifdef BOOST
 	INCLUDES+=-I$(BOOST)/include
 endif
 
+ifdef EIGEN3
+	INCLUDES+=-I$(EIGEN3)
+endif
+
 .SUFFIXES:.c .cpp .o
 .PHONY:all
 
@@ -29,6 +33,9 @@ matmul:matmul.o
 		$(CC) $< -o $@ $(LIBS)
 
 matmul-boost:matmul-boost.o
+		$(CXX) $< -o $@ $(LIBS)
+
+matmul-eigen:matmul-eigen.o
 		$(CXX) $< -o $@ $(LIBS)
 
 clean:
