@@ -24,7 +24,7 @@ to see the available options. Here is the result on my machines:
 
 |Implementation |-a |Linux,-n2000|Linux,-n4000|Linux/icc,-n4000|Mac,-n2000|
 |:--------------|:-:|-----------:|-----------:|---------------:|---------:|
-|Naive          | 0 |7.53 sec    | 188.85 sec |173.76sec |77.45 sec |
+|Naive          | 0 |7.53 sec    | 188.85 sec |173.76 sec|77.45 sec |
 |Transposed     | 1 |6.66 sec    |  55.48 sec |21.04 sec | 9.73 sec |
 |sdot w/o hints | 4 |6.66 sec    |  55.04 sec |21.35 sec | 9.70 sec |
 |sdot with hints| 3 |2.41 sec    |  29.47 sec |21.69 sec | 2.92 sec |
