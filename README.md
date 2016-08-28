@@ -21,7 +21,7 @@ or omit the `CBLAS` setting you don't have it. After compilation, use
 to see the available options. Here is the result on my machines:
 
 |Algorithm|Description    |Linux,N=2000|Mac,N=2000|
-|:-------:|:--------------|-----------:|:--------:|
+|:-------:|:--------------|-----------:|---------:|
 |0        |Naive          |7.53 sec    |77.45 sec |
 |1        |Transposed     |6.66 sec    | 9.73 sec |
 |4        |sdot w/o hints |6.66 sec    | 9.70 sec |
