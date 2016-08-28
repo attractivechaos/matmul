@@ -176,6 +176,24 @@ float **mat_mul2(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, floa
 	mat_destroy(bT);
 	return m;
 }
+float **mat_mul7(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, float *const *b)
+{
+	int i, j, ii, jj, x = 16, n_b_rows = n_a_cols;
+	float **m, **bT;
+	m = mat_init(n_a_rows, n_b_cols);
+	bT = mat_transpose(n_b_rows, n_b_cols, b);
+	for (i = 0; i < n_a_rows; i += x) {
+		for (j = 0; j < n_b_cols; j += x) {
+			int je = n_b_cols < j + x? n_b_cols : j + x;
+			int ie = n_a_rows < i + x? n_a_rows : i + x;
+			for (ii = i; ii < ie; ++ii)
+				for (jj = j; jj < je; ++jj)
+					m[ii][jj] += sdot_sse(n_a_cols, a[ii], bT[jj]);
+		}
+	}
+	mat_destroy(bT);
+	return m;
+}
 #endif
 
 float **mat_mul3(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, float *const *b)
@@ -252,7 +270,10 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "  -a INT    matrix multiplication implementation [%d]\n", algo);
 			fprintf(stderr, "            0: naive - no optimization\n");
 			fprintf(stderr, "            1: transposing the second matrix\n");
+#ifdef __SSE__
 			fprintf(stderr, "            2: explicitly vectorized sdot() with SSE\n");
+			fprintf(stderr, "            7: explicitly SSE sdot() plus loop tiling\n");
+#endif
 			fprintf(stderr, "            3: implicitly vectorized sdot()\n");
 			fprintf(stderr, "            4: no vectorization hints\n");
 #ifdef HAVE_CBLAS
@@ -272,8 +293,12 @@ int main(int argc, char *argv[])
 		m = mat_mul0(n, n, a, n, b);
 	} else if (algo == 1) {
 		m = mat_mul1(n, n, a, n, b);
+#ifdef __SSE__
 	} else if (algo == 2) {
 		m = mat_mul2(n, n, a, n, b);
+	} else if (algo == 7) {
+		m = mat_mul7(n, n, a, n, b);
+#endif
 	} else if (algo == 3) {
 		m = mat_mul3(n, n, a, n, b);
 	} else if (algo == 4) {

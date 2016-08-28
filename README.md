@@ -8,6 +8,7 @@ large square matrices (2000-by-2000 in the following example):
 |sdot w/o hints |Replacing the inner loop with [BLAS sdot()][sdot]|
 |sdot with hints|sdot() with a bit unrolled loop|
 |SSE sdot       |vectorized sdot() with explicit SSE instructions|
+|SSE+tiling sdot|SSE sdot() with [loop tiling][looptile]|
 |OpenBLAS sdot  |sdot() provided by OpenBLAS|
 |OpenBLAS sgemm |sgemm() provided by OpenBLAS|
 
@@ -27,7 +28,8 @@ to see the available options. Here is the result on my machines:
 |Transposed     |-a1 -n2000|6.66 sec | 9.73 sec |
 |sdot w/o hints |-a4 -n2000|6.66 sec | 9.70 sec |
 |sdot with hints|-a3 -n2000|2.41 sec | 2.92 sec |
-|SSE sdot       |-a2 -n2000|1.48 sec | 2.92 sec |
+|SSE sdot       |-a2 -n2000|1.36 sec | 2.92 sec |
+|SSE+tiling sdot|-a7 -n2000|1.11 sec | 1.90 sec |
 |OpenBLAS sdot  |-a5 -n2000|2.69 sec | 5.61 sec |
 |OpenBLAS sgemm |-a6 -n2000|0.63 sec | 0.86 sec |
 
@@ -54,3 +56,4 @@ NO_LAPACKE=1
 [sdot]: http://www.netlib.org/lapack/lug/node145.html
 [maccpu]: http://ark.intel.com/products/54620
 [linuxcpu]: http://ark.intel.com/products/81059
+[looptile]: https://en.wikipedia.org/wiki/Loop_tiling
