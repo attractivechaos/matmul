@@ -1,5 +1,6 @@
 CC=			gcc
 CFLAGS=		-g -Wall -Wc++-compat -O2
+CXXFLAGS=	-g -Wall -O2 -DNDEBUG -DBOOST_UBLAS_NDEBUG
 PROG=		matmul
 #CBLAS=		$(HOME)/OpenBLAS
 
@@ -9,16 +10,26 @@ ifdef CBLAS
 	LIBS=-L$(CBLAS)/lib -lopenblas
 endif
 
-.SUFFIXES:.c .o
+ifdef BOOST
+	INCLUDES+=-I$(BOOST)/include
+endif
+
+.SUFFIXES:.c .cpp .o
 .PHONY:all
 
 .c.o:
 		$(CC) -c $(CFLAGS) $(CPPFLAGS) $(INCLUDES) $< -o $@
 
+.cpp.o:
+		$(CXX) -c $(CXXFLAGS) $(CPPFLAGS) $(INCLUDES) $< -o $@
+
 all:$(PROG)
 
 matmul:matmul.o
 		$(CC) $< -o $@ $(LIBS)
+
+matmul-boost:matmul-boost.o
+		$(CXX) $< -o $@ $(LIBS)
 
 clean:
 		rm -fr gmon.out *.o a.out $(PROG) *~ *.a *.dSYM session*
