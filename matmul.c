@@ -204,6 +204,31 @@ float **mat_mul4(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, floa
 	return m;
 }
 
+#ifdef HAVE_CBLAS
+#include <cblas.h>
+
+float **mat_mul5(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, float *const *b)
+{
+	int i, j, n_b_rows = n_a_cols;
+	float **m, **bT;
+	m = mat_init(n_a_rows, n_b_cols);
+	bT = mat_transpose(n_b_rows, n_b_cols, b);
+	for (i = 0; i < n_a_rows; ++i)
+		for (j = 0; j < n_b_cols; ++j)
+			m[i][j] = cblas_sdot(n_a_cols, a[i], 1, bT[j], 1);
+	mat_destroy(bT);
+	return m;
+}
+
+float **mat_mul6(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, float *const *b)
+{
+	float **m, n_b_rows = n_a_cols;
+	m = mat_init(n_a_rows, n_b_cols);
+	cblas_sgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, n_a_rows, n_b_cols, n_a_cols, 1.0f, a[0], n_a_rows, b[0], n_b_rows, 0.0f, m[0], n_a_rows);
+	return m;
+}
+#endif
+
 /*****************
  * Main function *
  *****************/
@@ -230,6 +255,10 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "            2: explicitly vectorized sdot() with SSE\n");
 			fprintf(stderr, "            3: implicitly vectorized sdot()\n");
 			fprintf(stderr, "            4: no vectorization hints\n");
+#ifdef HAVE_CBLAS
+			fprintf(stderr, "            5: with sdot() from an external CBLAS library\n");
+			fprintf(stderr, "            6: with sgemm() from an external CBLAS library\n");
+#endif
 			fprintf(stderr, "  -h        this help message\n");
 			return 1;
 		}
@@ -249,6 +278,12 @@ int main(int argc, char *argv[])
 		m = mat_mul3(n, n, a, n, b);
 	} else if (algo == 4) {
 		m = mat_mul4(n, n, a, n, b);
+#ifdef HAVE_CBLAS
+	} else if (algo == 5) {
+		m = mat_mul5(n, n, a, n, b);
+	} else if (algo == 6) {
+		m = mat_mul6(n, n, a, n, b);
+#endif
 	} else {
 		fprintf(stderr, "ERROR: unknown algorithm %d\n", algo);
 		return 1;

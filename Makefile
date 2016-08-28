@@ -1,9 +1,13 @@
 CC=			gcc
 CFLAGS=		-g -Wall -Wc++-compat -O2
-CPPFLAGS=
-INCLUDES=	-I.
 PROG=		matmul
-LIBS=
+#CBLAS=		$(HOME)/OpenBLAS
+
+ifdef CBLAS
+	CPPFLAGS=-DHAVE_CBLAS
+	INCLUDES=-I$(CBLAS)/include
+	LIBS=-L$(CBLAS)/lib -lopenblas
+endif
 
 .SUFFIXES:.c .o
 .PHONY:all
