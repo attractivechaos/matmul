@@ -178,7 +178,7 @@ float **mat_mul2(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, floa
 }
 float **mat_mul7(int n_a_rows, int n_a_cols, float *const *a, int n_b_cols, float *const *b)
 {
-	int i, j, ii, jj, x = 16, n_b_rows = n_a_cols;
+	int i, j, ii, jj, x = 8, n_b_rows = n_a_cols;
 	float **m, **bT;
 	m = mat_init(n_a_rows, n_b_cols);
 	bT = mat_transpose(n_b_rows, n_b_cols, b);

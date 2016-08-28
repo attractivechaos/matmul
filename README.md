@@ -22,16 +22,16 @@ or omit the `CBLAS` setting you don't have it. After compilation, use
 ```
 to see the available options. Here is the result on my machines:
 
-|Implementation |Invocation|Linux    |Mac       |
-|:--------------|:--------:|--------:|---------:|
-|Naive          |-a0 -n2000|7.53 sec |77.45 sec |
-|Transposed     |-a1 -n2000|6.66 sec | 9.73 sec |
-|sdot w/o hints |-a4 -n2000|6.66 sec | 9.70 sec |
-|sdot with hints|-a3 -n2000|2.41 sec | 2.92 sec |
-|SSE sdot       |-a2 -n2000|1.36 sec | 2.92 sec |
-|SSE+tiling sdot|-a7 -n2000|1.11 sec | 1.90 sec |
-|OpenBLAS sdot  |-a5 -n2000|2.69 sec | 5.61 sec |
-|OpenBLAS sgemm |-a6 -n2000|0.63 sec | 0.86 sec |
+|Implementation |-a|Linux,-n2000|Linux,-n4000|Mac,-n2000|
+|:--------------|::|-----------:|-----------:|---------:|
+|Naive          |0 |7.53 sec    | 188.85 sec |77.45 sec |
+|Transposed     |1 |6.66 sec    |  55.48 sec | 9.73 sec |
+|sdot w/o hints |4 |6.66 sec    |  55.04 sec | 9.70 sec |
+|sdot with hints|3 |2.41 sec    |  29.47 sec | 2.92 sec |
+|SSE sdot       |2 |1.36 sec    |  21.79 sec | 2.92 sec |
+|SSE+tiling sdot|7 |1.11 sec    |  10.84 sec | 1.90 sec |
+|OpenBLAS sdot  |5 |2.69 sec    |  28.87 sec | 5.61 sec |
+|OpenBLAS sgemm |6 |0.63 sec    |   4.91 sec | 0.86 sec |
 
 The machine configurations are as follows:
 
