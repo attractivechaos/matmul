@@ -20,15 +20,15 @@ or omit the `CBLAS` setting you don't have it. After compilation, use
 ```
 to see the available options. Here is the result on my machines:
 
-|Algorithm|Description    |Linux,N=2000|Mac,N=2000|
-|:-------:|:--------------|-----------:|---------:|
-|0        |Naive          |7.53 sec    |77.45 sec |
-|1        |Transposed     |6.66 sec    | 9.73 sec |
-|4        |sdot w/o hints |6.66 sec    | 9.70 sec |
-|3        |sdot with hints|2.41 sec    | 2.92 sec |
-|2        |SSE sdot       |1.48 sec    | 2.92 sec |
-|5        |OpenBLAS sdot  |2.69 sec    | 5.61 sec |
-|6        |OpenBLAS sgemm |0.63 sec    | 0.86 sec |
+|Implementation |Invokation|Linux    |Mac       |
+|:--------------|:--------:|--------:|---------:|
+|Naive          |-a0 -n2000|7.53 sec |77.45 sec |
+|Transposed     |-a1 -n2000|6.66 sec | 9.73 sec |
+|sdot w/o hints |-a4 -n2000|6.66 sec | 9.70 sec |
+|sdot with hints|-a3 -n2000|2.41 sec | 2.92 sec |
+|SSE sdot       |-a2 -n2000|1.48 sec | 2.92 sec |
+|OpenBLAS sdot  |-a5 -n2000|2.69 sec | 5.61 sec |
+|OpenBLAS sgemm |-a6 -n2000|0.63 sec | 0.86 sec |
 
 The machine configurations are as follows:
 
