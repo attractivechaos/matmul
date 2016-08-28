@@ -20,7 +20,7 @@ or omit the `CBLAS` setting you don't have it. After compilation, use
 ```
 to see the available options. Here is the result on my machines:
 
-|Implementation |Invokation|Linux    |Mac       |
+|Implementation |Invocation|Linux    |Mac       |
 |:--------------|:--------:|--------:|---------:|
 |Naive          |-a0 -n2000|7.53 sec |77.45 sec |
 |Transposed     |-a1 -n2000|6.66 sec | 9.73 sec |
