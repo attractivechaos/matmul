@@ -32,6 +32,7 @@ to see the available options. Here is the result on my machines:
 |SSE+tiling sdot| 7 |1.11 sec    |  10.84 sec |10.97 sec | 1.90 sec |
 |OpenBLAS sdot  | 5 |2.69 sec    |  28.87 sec |          | 5.61 sec |
 |OpenBLAS sgemm | 6 |0.63 sec    |   4.91 sec |          | 0.86 sec |
+|uBLAS          |   |7.43 sec    | 165.74 sec |          |          |
 
 The machine configurations are as follows:
 
