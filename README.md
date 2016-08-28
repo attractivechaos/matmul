@@ -1,4 +1,5 @@
-This repo evaluates different matrix multiplication implementations:
+This repo evaluates different matrix multiplication implementations given two
+large square matrices (2000-by-2000 in the following example):
 
 |Implementation |Long description|
 |:--------------|:---------------|
@@ -10,7 +11,7 @@ This repo evaluates different matrix multiplication implementations:
 |OpenBLAS sdot  |sdot() provided by OpenBLAS|
 |OpenBLAS sgemm |sgemm() provided by OpenBLAS|
 
-To compile this program:
+To compile the evaluation program:
 ```sh
 make CBLAS=/path/to/cblas/prefix
 ```
