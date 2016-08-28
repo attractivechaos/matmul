@@ -37,8 +37,8 @@ The machine configurations are as follows:
 |Linux  |2.6 GHz Xeon E5-2697 |CentOS 6   |gcc-4.4.7 |
 |Mac    |1.7 GHz Intel Core i5|OS X 10.9.5|clang-600.0.57/LLVM-3.5svn|
 
-On both machines, [OpenBLAS][oblas] is compiled with the following options (no
-AVX or multithreading):
+On both machines, [OpenBLAS][oblas]-0.2.18 is compiled with the following
+options (no AVX or multithreading):
 ```sh
 TARGET=CORE2
 BINARY=64
