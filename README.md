@@ -10,7 +10,15 @@ This repo evaluates different matrix multiplication implementations:
 |OpenBLAS sdot  |sdot() provided by OpenBLAS|
 |OpenBLAS sgemm |sgemm() provided by OpenBLAS|
 
-Here is the result:
+To compile this program:
+```sh
+make CBLAS=/path/to/cblas/prefix
+```
+or omit the `CBLAS` setting you don't have it. After compilation, use
+```sh
+./matmul -h
+```
+to see the available options. Here is the result on my machines:
 
 |Algorithm|Description    |Linux,N=2000|Mac,N=2000|
 |:-------:|:--------------|-----------:|:--------:|
