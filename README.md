@@ -22,7 +22,7 @@ or omit the `CBLAS` setting you don't have it. After compilation, use
 ```
 to see the available options. Here is the result on my machines:
 
-|Implementation |-a |Linux,-n2000|Linux/gcc,-n4000|Linux/icc,-n4000|Mac,-n2000|
+|Implementation |-a |Linux,-n2000|Linux,-n4000|Linux/icc,-n4000|Mac,-n2000|
 |:--------------|:-:|-----------:|-----------:|---------------:|---------:|
 |Naive          | 0 |7.53 sec    | 188.85 sec |173.76sec |77.45 sec |
 |Transposed     | 1 |6.66 sec    |  55.48 sec |21.04 sec | 9.73 sec |
