@@ -33,7 +33,7 @@ to see the available options. Here is the result on my machines:
 |OpenBLAS sdot  | 5 |2.69 sec    |  28.87 sec |          | 5.61 sec |
 |OpenBLAS sgemm | 6 |0.63 sec    |   4.91 sec |          | 0.86 sec |
 |[uBLAS][ublas] |   |7.43 sec    | 165.74 sec |          |          |
-|[Eigen][eigen] |   |0.61 sec    |   4.76 sec | 5.01 sec |          |
+|[Eigen][eigen] |   |0.61 sec    |   4.76 sec | 5.01 sec | 0.85 sec |
 
 The machine configurations are as follows:
 
